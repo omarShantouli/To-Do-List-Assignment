@@ -83,6 +83,14 @@ class Form extends React.Component{
         this.updating(this.state.update_phase.idx);
 
     }
+    
+    cancel(){
+        this.setState({
+            title : "",
+            description : "",
+            update_phase : {mode : 1, idx : undefined}
+        })
+    }
 
     render(){
         var tasks = this.state.tasks;
@@ -110,11 +118,16 @@ class Form extends React.Component{
                     <div>
                         {
                             this.state.update_phase.mode?
-                            <button type='submit'>Add</button> :
-                            <button type='submit' >Update</button>
-
+                            <div>
+                                <button type='submit'>Add</button> 
+                                <button onClick={this.reset.bind(this)} style={{margin: "30px"}}>Reset</button>
+                            </div>
+                            :
+                            <div>
+                                <button type='submit' >Update</button>
+                                <button onClick={this.cancel.bind(this)} style={{margin: "30px"}}>Cancel</button>
+                            </div>
                         }
-                        <button onClick={this.reset.bind(this)} style={{margin: "30px"}}>Reset</button>
                     </div>
 
                 </form>
